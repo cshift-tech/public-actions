@@ -1,0 +1,19 @@
+name: Build TypeScript app
+
+on:
+  workflow_call:
+    inputs:
+      image-tag:
+        required: true
+        type: string
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build docker image
+        run: docker build -t ${{ inputs.image-tag }}
+      - name: Push image
+        run: echo 'TODO implement image push'
+         
