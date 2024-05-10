@@ -2,13 +2,12 @@ name: Security scans for TS apps
 
 on:
   workflow_call:
-    inputs:
-      image-tag:
-        required: true
-        type: string
 
 permissions:
   contents: read
+
+env:
+  IMAGE_TAG: ${{ github.repository }}:${{ github.sha }}
 
 jobs:
   build-and-scan-with-trivy:
@@ -21,11 +20,11 @@ jobs:
       - uses: actions/checkout@v4
       - name: Build image from Dockerfile
         run: |
-          docker build -t ${{ inputs.image-tag }}
+          docker build -t ${{ env.IMAGE_TAG }}
       - name: Run trivy vulnerability scanner
         uses: aquasecurity/trivy-action@b2933f565dbc598b29947660e66259e3c7bc8561
         with:
-          image-ref: '${{ inputs.image-tag }}'
+          image-ref: '${{ env.IMAGE_TAG }}'
           format: 'template'
           template: '@/contrib/sarif.tpl'
           output: 'trivy-results.sarif'
