@@ -12,8 +12,9 @@ permissions:
 
 jobs:
   build-and-scan-with-trivy:
-    contents: read
-    security-events: write
+    permissions:
+      contents: read
+      security-events: write
     name: Build and scan
     runs-on: ubuntu-latest
     steps:
