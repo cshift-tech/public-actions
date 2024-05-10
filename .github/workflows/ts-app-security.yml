@@ -25,8 +25,7 @@ jobs:
         uses: aquasecurity/trivy-action@b2933f565dbc598b29947660e66259e3c7bc8561
         with:
           image-ref: '${{ env.IMAGE_TAG }}'
-          format: 'template'
-          template: '@/contrib/sarif.tpl'
+          format: 'sarif'
           output: 'trivy-results.sarif'
       - name: Upload Trivy scan results to Github Security tab
         uses: github/codeql-action/upload-sarif@v3
