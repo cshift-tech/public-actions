@@ -36,7 +36,7 @@ jobs:
           severity: 'CRITICAL,HIGH'
           exit-code: 1
       - run: |
-          echo "ESCAPED_IMAGE_TAG=$(${{ env.IMAGE_TAG }} | sed 's/\//\\\//g') >> $GITHUB_ENV
+          echo "ESCAPED_IMAGE_TAG=$(echo ${{ env.IMAGE_TAG }} | sed 's/\//\\\//g')" >> $GITHUB_ENV
           sed -i 's/library\/${{ env.ESCAPED_IMAGE_TAG }}/"Dockerfile\"/g' trivy-results.sarif
           cat trivy-results.sarif
         if: always()
