@@ -36,12 +36,12 @@ jobs:
           severity: 'CRITICAL,HIGH'
           exit-code: 1
       - run: |
-          sed 's/\"uri\"\: \"library\/${{ env.IMAGE_TAG }}\"/\"uri\":\ "Dockerfile\"/g' <trivy-results.sarif >trivy-results-fixed-path.sarif
+          sed -i 's/library\/${{ env.IMAGE_TAG }}/"Dockerfile\"/g' trivy-results.sarif
         if: always()
       - name: Upload Trivy scan results to Github Security tab
         uses: github/codeql-action/upload-sarif@v3
         if: always()
         with:
-          sarif_file: 'trivy-results-fixed-path.sarif'
+          sarif_file: 'trivy-results.sarif'
 
 
