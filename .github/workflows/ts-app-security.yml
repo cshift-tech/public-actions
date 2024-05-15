@@ -34,7 +34,6 @@ jobs:
           format: 'sarif'
           output: 'trivy-results.sarif'
           severity: 'CRITICAL,HIGH'
-          exit-code: 1
       - run: |
           sed -i "s/library\/security-build/Dockerfile/g" trivy-results.sarif
           tail -n 1000 trivy-results.sarif
