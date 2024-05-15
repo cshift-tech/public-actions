@@ -37,7 +37,7 @@ jobs:
           exit-code: 1
       - run: |
           echo "ESCAPED_REPOSITORY=$(echo \"${{ github.repository }}\" | sed 's/\//\\\//g')" >> $GITHUB_ENV
-          sed -i 's/${{ ESCAPED_REPOSITORY }}/"Dockerfile\"/g' trivy-results.sarif
+          sed -i 's/$ESCAPED_REPOSITORY/"Dockerfile\"/g' trivy-results.sarif
           cat trivy-results.sarif
         if: always()
       - name: Upload Trivy scan results to Github Security tab
