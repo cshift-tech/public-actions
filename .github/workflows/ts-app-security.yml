@@ -24,13 +24,13 @@ jobs:
         run: |
           docker build . -t ${{ env.IMAGE_TAG }}
       - name: Run trivy vulnerability scanner and print output
-        uses: aquasecurity/trivy-action@b2933f565dbc598b29947660e66259e3c7bc8561
+        uses: aquasecurity/trivy-action@6e7b7d1fd3e4fef0c5fa8cce1229c54b2c9bd0d8
         with:
           image-ref: '${{ env.IMAGE_TAG }}'
           format: 'table'
           severity: 'CRITICAL,HIGH'
       - name: Run trivy vulnerability scanner and generate sarif output
-        uses: aquasecurity/trivy-action@b2933f565dbc598b29947660e66259e3c7bc8561
+        uses: aquasecurity/trivy-action@6e7b7d1fd3e4fef0c5fa8cce1229c54b2c9bd0d8
         with:
           image-ref: '${{ env.IMAGE_TAG }}'
           format: 'sarif'
